@@ -6,7 +6,7 @@ module.change_code = 1;
 // Define an alexa-app
 var app = new alexa.app('helloworld');
 app.launch(function(req,res) {
-	res.say("Hello World!!");
+	res.say("Hello World!!").shouldEndSession(false);
 });
 app.intent('NameIntent', {
 		"slots":{"NAME":"LITERAL","AGE":"NUMBER"}
