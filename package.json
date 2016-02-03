@@ -1,0 +1,29 @@
+{
+  "name": "alexa-games",
+  "version": "1.0.0",
+  "description": "Alexa Games",
+  "main": "server.js",
+  "dependencies": {
+    "alexa-app": "^2.3.2",
+    "alexa-app-server": "^2.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elisemory/alexa-games.git"
+  },
+  "keywords": [
+    "Alexa",
+    "Games"
+  ],
+  "author": "Eli Semory",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elisemory/alexa-games/issues"
+  },
+  "homepage": "https://github.com/elisemory/alexa-games#readme"
+}
