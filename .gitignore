@@ -1,2 +1,7 @@
 node_modules/alexa-app
 node_moduels/socket.io
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
