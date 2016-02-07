@@ -7,10 +7,10 @@ module.change_code = 1;
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
-	res.say("Let's play the color game!").shouldEndSession(false);
+	res.say(<audio src="http://www.noiseaddicts.com/free-samples-mp3/?id=3727" />).shouldEndSession(false);
 });
 
-//app.dictionary = {"colors":["red","yellow","green","white","blue","black"]};
+var colorsArr = ["red","yellow","green","white","blue","black"];
 
 app.intent('ColorIntent', {
 		"slots":{"color":"COLORS"}
@@ -29,8 +29,16 @@ app.io = function(server_io) {
 	io = server_io;
 	io.on('connection', function(socket){
 			console.log(app.name + ' io connect');
-			io.emit('chat message', app.name);
+			io.emit('change_color', 'blue');
   	})
 }
+
+setInterval(function(){
+	if (io) {
+		var color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+		console.log(color)
+		io.emit('change_color', color);
+	}
+}, 2000)
 
 module.exports = app;
