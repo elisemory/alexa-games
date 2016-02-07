@@ -1,5 +1,4 @@
 var alexa = require('alexa-app');
-
 var io;
 
 // Allow this module to be reloaded by hotswap when changed
@@ -8,20 +7,16 @@ module.change_code = 1;
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
-	res.say("Hello World!!").shouldEndSession(false);
+	res.say("Let's play the color game!").shouldEndSession(false);
 });
-app.intent('NameIntent', {
-		"slots":{"NAME":"LITERAL","AGE":"NUMBER"}
-		,"utterances":["{My name is|my name's} {matt|bob|bill|jake|nancy|mary|jane|NAME} and I am {1-100|AGE}{ years old|}"]
+
+app.dictionary = {"colors":["red","yellow","green","white","blue","black"]};
+
+app.intent('ColorIntent', {
+		"slots":{"COLOR":"LITERAL"}
+		,"utterances":["Change color to {colors:COLOR}"]
 	},function(req,res) {
-		res.say('Your name is '+req.slot('NAME')+' and you are '+req.slot('AGE')+' years old');
-	}
-);
-app.intent('AgeIntent', {
-		"slots":{"AGE":"NUMBER"}
-		,"utterances":["My age is {1-100|AGE}"]
-	},function(req,res) {
-		res.say('Your age is '+req.slot('AGE'));
+		res.say('The color is '+req.slot('COLOR'));
 	}
 );
 
