@@ -10,13 +10,13 @@ app.launch(function(req,res) {
 	res.say("Let's play the color game!").shouldEndSession(false);
 });
 
-app.dictionary = {"colors":["red","yellow","green","white","blue","black"]};
+//app.dictionary = {"colors":["red","yellow","green","white","blue","black"]};
 
 app.intent('ColorIntent', {
-		"slots":{"COLOR":"LITERAL"}
+		"slots":{"color":"COLORS"}
 		,"utterances":["Change color to {colors:COLOR}"]
 	},function(req,res) {
-		res.say('The color is '+req.slot('COLOR'));
+		res.say('The color is ' + req.slot('color'));
 	}
 );
 
