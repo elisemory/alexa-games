@@ -16,7 +16,7 @@ app.intent('ColorIntent', {
 		"slots":{"color":"COLORS"}
 		,"utterances":["Change color to {colors:COLOR}"]
 	},function(req,res) {
-		res.say('The color is ' + req.slot('color'));
+		res.say('The color is ' + req.slot('color')).shouldEndSession(false);
 	}
 );
 
