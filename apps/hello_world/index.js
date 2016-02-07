@@ -22,4 +22,9 @@ app.intent('AgeIntent', {
 		res.say('Your age is '+req.slot('AGE'));
 	}
 );
+
+app.game = function(req, res) {
+	res.render('index');
+}
+
 module.exports = app;
