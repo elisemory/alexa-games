@@ -7,7 +7,7 @@ module.change_code = 1;
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
-	res.say('Welcome! <audio src="https://s3.amazonaws.com/alexagamesmedia/output.mp3" </audio>').shouldEndSession(false);
+	res.say("Let's start the color game!").shouldEndSession(false);
 });
 
 var colorsArr = ["red","yellow","green","white","blue","black"];
