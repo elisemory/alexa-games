@@ -7,7 +7,6 @@ module.change_code = 1;
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
-	<audio src="prompt.au">What city do you want to fly from?</audio>
 	res.say('Welcome! <audio src="https://s3.amazonaws.com/alexagamesmedia/output.mp3" </audio>').shouldEndSession(false);
 });
 
