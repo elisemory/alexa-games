@@ -1,5 +1,5 @@
 node_modules/alexa-app
-node_moduels/socket.io
+node_modules/socket.io
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
