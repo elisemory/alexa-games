@@ -8,7 +8,7 @@ module.change_code = 1;
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
 	//res.say("Let's start the color game!").shouldEndSession(false);
-	res.ssml('<speak> Welcome to Car-Fu. <audio src="https://s3.amazonaws.com/alexagamesmedia/output.mp3" /> You can order a ride, or request a fare estimate. Which will it be? </speak>')
+	res.ssml('<speak>Good answer! Lets try another one <audio src="https://s3-eu-west-1.amazonaws.com/tlnbucket/vocalappsAVSShakiratangomp3cutnet.mp3" /></speak>')
 });
 
 var colorsArr = ["red","yellow","green","white","blue","black"];
