@@ -12,10 +12,10 @@ app.launch(function(req,res) {
 });
 
 app.intent('NameIntent', {
-		"slots":{"NAME":"LITERAL"}
-		,"utterances":["My name is {matt|bob|bill|jake|nancy|mary|jane|NAME}"]
+		"slots":{"NAMES":"LITERAL"}
+		,"utterances":["My name is {matt|bob|bill|jake|nancy|mary|jane|NAMES}"]
 	},function(req,res) {
-		res.say('Hi ' + req.slot('NAME') + "! My name is Alexa, nice to meet you!");
+		res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, nice to meet you!");
 	}
 );
 
