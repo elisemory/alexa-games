@@ -8,14 +8,14 @@ module.change_code = 1;
 var app = new alexa.app('saymyname');
 app.launch(function(req,res) {
 	//res.say("Let's start the color game!").shouldEndSession(false);
-	res.say('<speak>Hi! my name is Alexa! what is your name?</speak>')
+	res.say('<speak>Hi! my name is Alexa! what is your name?</speak>').shouldEndSession(false);
 });
 
 app.intent('NameIntent', {
-		"slots":{"name":"LITERAL"}
-		,"utterances":["My name is {NAME}"]
+		"slots":{"NAME":"LITERAL"}
+		,"utterances":["My name is {matt|bob|bill|jake|nancy|mary|jane|NAME}"]
 	},function(req,res) {
-		res.say('Hi ' + req.slot('name') + "! My name is Alexa, nice to meet you!");
+		res.say('Hi ' + req.slot('NAME') + "! My name is Alexa, nice to meet you!");
 	}
 );
 
