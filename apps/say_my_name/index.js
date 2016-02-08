@@ -17,7 +17,9 @@ var responses = [
 	"Welcome!",
 	"Shalom!",
 	"I'm happy to be here!",
-	"Bye Bye!"
+	"Bye Bye!",
+	"Hakol Sababba?",
+	""
 ]
 
 app.intent('NameIntent', {
