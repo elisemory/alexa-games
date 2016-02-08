@@ -7,13 +7,11 @@ module.change_code = 1;
 // Define an alexa-app
 var app = new alexa.app('saymyname');
 app.launch(function(req,res) {
-	//res.say("Let's start the color game!").shouldEndSession(false);
 	res.say('Hi! my name is Alexa! what is your name?').shouldEndSession(false);
 });
 
 app.sessionEnded(function(req,res) {
-	//res.say("Let's start the color game!").shouldEndSession(false);
-	res.say('Bye Bye!')
+	res.say('Bye Bye!');
 });
 
 var responses = [
@@ -31,7 +29,11 @@ app.intent('NameIntent', {
 		"slots":{"NAMES":"LITERAL"}
 		,"utterances":["My name is {matt|bob|bill|jake|nancy|mary|jane|NAMES}"]
 	},function(req,res) {
-		res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, " + responses[Math.floor(Math.random() * responses.length)]).shouldEndSession(false);
+		if (req.slot('NAMES') === undefined) {
+			res.say('Naassee shoovv').shouldEndSession(false);
+		} else {
+			res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, " + responses[Math.floor(Math.random() * responses.length)]).shouldEndSession(false);
+		}
 	}
 );
 
