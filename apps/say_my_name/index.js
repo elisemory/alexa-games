@@ -26,7 +26,7 @@ app.intent('NameIntent', {
 		"slots":{"NAMES":"LITERAL"}
 		,"utterances":["My name is {matt|bob|bill|jake|nancy|mary|jane|NAMES}"]
 	},function(req,res) {
-		res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, " + responses[Math.floor(Math.random() * responses.length)]);
+		res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, " + responses[Math.floor(Math.random() * responses.length)]).shouldEndSession(false);
 	}
 );
 
