@@ -11,11 +11,20 @@ app.launch(function(req,res) {
 	res.say('<speak>Hi! my name is Alexa! what is your name?</speak>').shouldEndSession(false);
 });
 
+var responses = [
+	"Its a nice day!",
+	"Nice to meet you!",
+	"Welcome!",
+	"Shalom!",
+	"I'm happy to be here!",
+	"Bye Bye!"
+]
+
 app.intent('NameIntent', {
 		"slots":{"NAMES":"LITERAL"}
 		,"utterances":["My name is {matt|bob|bill|jake|nancy|mary|jane|NAMES}"]
 	},function(req,res) {
-		res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, nice to meet you!");
+		res.say('Hi ' + req.slot('NAMES') + "! My name is Alexa, " + responses[Math.floor(Math.random() * responses.length)]);
 	}
 );
 
