@@ -8,7 +8,12 @@ module.change_code = 1;
 var app = new alexa.app('saymyname');
 app.launch(function(req,res) {
 	//res.say("Let's start the color game!").shouldEndSession(false);
-	res.say('<speak>Hi! my name is Alexa! what is your name?</speak>').shouldEndSession(false);
+	res.say('Hi! my name is Alexa! what is your name?').shouldEndSession(false);
+});
+
+app.sessionEnded(function(req,res) {
+	//res.say("Let's start the color game!").shouldEndSession(false);
+	res.say('Bye Bye!')
 });
 
 var responses = [
