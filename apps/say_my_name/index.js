@@ -15,7 +15,7 @@ app.intent('NameIntent', {
 		"slots":{"name":"LITERAL"}
 		,"utterances":["My name is {NAME}"]
 	},function(req,res) {
-		res.say('Hi' + req.slot('name') + "! My name alexa, nice to meet you!");
+		res.say('Hi ' + req.slot('name') + "! My name is Alexa, nice to meet you!");
 	}
 );
 
