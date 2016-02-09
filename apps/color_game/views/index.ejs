@@ -10,7 +10,7 @@
       socket.on('change_color', function(color) {
         document.body.style.backgroundColor = color;
       });
-      socket.on('start_game', function(color) {
+      socket.on('start_game', function() {
         $("#start_label").hide();
       });
     </script>

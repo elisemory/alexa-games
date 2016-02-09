@@ -4,23 +4,34 @@ var io;
 // Allow this module to be reloaded by hotswap when changed
 module.change_code = 1;
 
+var colorsArr = ["red","yellow","green","white","blue","black"];
+
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
-	//res.say("Let's start the color game!").shouldEndSession(false);
- 	io.emit('start_game');
-	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>')
+	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>')//.shouldEndSession(false);
+	io.emit('start_game');
+	color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+	res.session('color', color);
+	res.session('score', 0);
+	io.emit('change_color', color);
 });
 
-var colorsArr = ["red","yellow","green","white","blue","black"];
-
 app.intent('ColorIntent', {
-		"slots":{"color":"COLORS_SLOT"}
-		,"utterances":["Change color to {colors:COLOR}"]
+		"slots":{"color":"COLORS_SLOT"},
+		"utterances":["{colors:COLORS_SLOT}"]
 	},function(req,res) {
-		res.say('The color is ' + req.slot('color')).shouldEndSession(false);
+		console.log(res.session('color') + ' ' + req.slot('color'));
+		if(res.session('color') === req.slot('color')) {
+			res.session('score', (res.session('score') + 1));
+			console.log('score: ' + res.session('score'));
+			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>')
+		} else {
+			console.log("BAD");
+		}
 	}
 );
+	
 
 app.game = function(req, res) {
 	res.render('index');
@@ -39,15 +50,5 @@ app.io = function(server_io) {
 			io.emit('change_color', 'white');
   	})
 }
-
-/*
-setInterval(function(){
-	if (io) {
-		var color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
-		console.log(color)
-		io.emit('change_color', color);
-	}
-}, 2000)
-*/
 
 module.exports = app;
