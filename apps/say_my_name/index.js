@@ -46,7 +46,7 @@ app.io = function(server_io) {
 	io = server_io;
 	io.on('connection', function(socket){
 			console.log(app.name + ' io connect');
-			io.emit('change_color', 'blue');
+			//io.emit('change_color', 'blue');
   	})
 }
 

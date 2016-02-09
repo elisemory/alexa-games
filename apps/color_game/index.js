@@ -8,13 +8,14 @@ module.change_code = 1;
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
 	//res.say("Let's start the color game!").shouldEndSession(false);
-	res.say('<speak>Good answer! Lets try another two <audio src="https://s3.amazonaws.com/alexagamesmedia/vocalappsAVSShakiratangomp3cutnet.mp3" /></speak>')
+ 	io.emit('start_game');
+	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>')
 });
 
 var colorsArr = ["red","yellow","green","white","blue","black"];
 
 app.intent('ColorIntent', {
-		"slots":{"color":"COLORS"}
+		"slots":{"color":"COLORS_SLOT"}
 		,"utterances":["Change color to {colors:COLOR}"]
 	},function(req,res) {
 		res.say('The color is ' + req.slot('color')).shouldEndSession(false);
@@ -35,7 +36,7 @@ app.io = function(server_io) {
 	io = server_io;
 	io.on('connection', function(socket){
 			console.log(app.name + ' io connect');
-			io.emit('change_color', 'blue');
+			io.emit('change_color', 'white');
   	})
 }
 

@@ -3,14 +3,22 @@
   <head>
     <title>Colors Game</title>
   </head>
-  <body>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script>
       var socket = io();
       socket.on('change_color', function(color) {
         document.body.style.backgroundColor = color;
       });
+      socket.on('start_game', function(color) {
+        $("#start_label").hide();
+      });
     </script>
+    <body style="width: 100%; height: 100%;">
+    <div style="top: 50%; left: 30%; position: absolute;">
+         <font size="120"><div id="start_label">Say "Alexa start color game!"</div></font>
+    </div>
   </body>
 </html>
+
+<div style="text-align:center;">
