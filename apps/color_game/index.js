@@ -4,7 +4,7 @@ var io;
 // Allow this module to be reloaded by hotswap when changed
 module.change_code = 1;
 
-var colorsArr = ["red","yellow","green","white","blue","black"];
+var colorsArr = ["red","yellow","green","blue","black", "brown"];
 
 // Define an alexa-app
 var app = new alexa.app('colorgame');
@@ -17,7 +17,7 @@ app.launch(function(req, res) {
 		res.session('color', color);
 		res.session('score', 0);
 		io.emit('change_color', color);
-	})
+	}, 3000)
 });
 
 app.intent('ColorIntent', {
