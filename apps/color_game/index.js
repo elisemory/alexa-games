@@ -8,13 +8,16 @@ var colorsArr = ["red","yellow","green","white","blue","black"];
 
 // Define an alexa-app
 var app = new alexa.app('colorgame');
-app.launch(function(req,res) {
+app.launch(function(req, res) {
 	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>').shouldEndSession(false);
 	io.emit('start_game');
 	color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
-	res.session('color', color);
-	res.session('score', 0);
-	io.emit('change_color', color);
+	setTimeout(function() {
+		console.log(color);
+		res.session('color', color);
+		res.session('score', 0);
+		io.emit('change_color', color);
+	})
 });
 
 app.intent('ColorIntent', {
@@ -26,6 +29,7 @@ app.intent('ColorIntent', {
 			res.session('score', (res.session('score') + 1));
 			console.log('score: ' + res.session('score'));
 			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>')
+			io.emit('smiley');
 		} else {
 			console.log("BAD");
 		}
