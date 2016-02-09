@@ -9,7 +9,7 @@ var colorsArr = ["red","yellow","green","white","blue","black"];
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req,res) {
-	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>')//.shouldEndSession(false);
+	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>').shouldEndSession(false);
 	io.emit('start_game');
 	color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
 	res.session('color', color);
