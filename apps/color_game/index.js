@@ -23,6 +23,10 @@ app.launch(function(req, res) {
 */
 });
 
+app.sessionEnded(function(req,res) {
+	res.say('Bye Bye!');
+});
+
 app.intent('ColorIntent', {
 		"slots":{"color":"COLORS_SLOT"},
 		"utterances":["{colors:COLORS_SLOT}"]
