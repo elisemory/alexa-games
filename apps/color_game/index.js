@@ -41,7 +41,7 @@ app.intent('ColorIntent', {
 			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>').shouldEndSession(done);
 			io.emit('correct', res.session('round'));
 		} else {
-			res.say('Please try again"/>').shouldEndSession(done);
+			res.say('Please try again').shouldEndSession(false);
 			io.emit('wrong', res.session('round'));
 		}
 		res.session('round', (res.session('round') + 1));
