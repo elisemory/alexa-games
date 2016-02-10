@@ -21,6 +21,12 @@ div.smiley
       });
       socket.on('start_game', function() {
         $("#start_label").hide();
+        $("#box1").css("background-color", 'white');
+        $("#box1").find('img').attr('src', "");
+        $("#box2").css("background-color", 'white');
+        $("#box2").find('img').attr('src', "");
+        $("#box3").css("background-color", 'white');
+        $("#box3").find('img').attr('src', "");
       });
       socket.on('correct', function(box) {
         $("#box"+box).find('img').attr('src', "https://s3.amazonaws.com/alexagamesmedia/smiley.png");
@@ -61,9 +67,6 @@ div.smiley
       <div id="box3" class="floating-box" >
          <img src="" width="200" height="200"</img>
       </div>
-    </div>
-    <div style="top: 10%; left: 30%; position: absolute; display:none" id="smiley" >
-         <img src="https://s3.amazonaws.com/alexagamesmedia/smiley.png"</img>
     </div>
     <div style="top: 50%; left: 30%; position: absolute;">
          <font size="120"><div id="start_label">Say "Alexa start color game!"</div></font>
