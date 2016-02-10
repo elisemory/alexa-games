@@ -4,7 +4,7 @@ var io;
 // Allow this module to be reloaded by hotswap when changed
 module.change_code = 1;
 
-var colorsArr = ["red","yellow","green","blue","black", "brown"];
+var colorsArr = ["red","yellow","green","blue","black"];
 
 // Define an alexa-app
 var app = new alexa.app('colorgame');
@@ -12,27 +12,38 @@ app.launch(function(req, res) {
 	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>').shouldEndSession(false);
 	io.emit('start_game');
 	color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+	console.log(color);
+	res.session('color', color);
+	res.session('round', 1);
+	io.emit('change_color', color, 1);
+	/*
 	setTimeout(function() {
-		console.log(color);
-		res.session('color', color);
-		res.session('score', 0);
-		io.emit('change_color', color);
-	}, 3000)
+		io.emit('change_color', color, 1);
+	}, 0)
+*/
 });
 
 app.intent('ColorIntent', {
 		"slots":{"color":"COLORS_SLOT"},
 		"utterances":["{colors:COLORS_SLOT}"]
 	},function(req,res) {
-		console.log(res.session('color') + ' ' + req.slot('color'));
-		if(res.session('color') === req.slot('color')) {
-			res.session('score', (res.session('score') + 1));
-			console.log('score: ' + res.session('score'));
-			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>')
-			io.emit('smiley');
-		} else {
-			console.log("BAD");
+		var done = (res.session('round') > 3);
+		if (done) {
+			res.say('Bye Bye!');
+			return;
 		}
+		console.log('round ' + res.session('round') + ' ' + res.session('color') + ' ' + req.slot('color'));
+		if(res.session('color') === req.slot('color')) {
+			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>').shouldEndSession(done);
+			io.emit('correct', res.session('round'));
+		} else {
+			res.say('Please try again"/>').shouldEndSession(done);
+			io.emit('wrong', res.session('round'));
+		}
+		res.session('round', (res.session('round') + 1));
+		color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+		console.log('next color ' + color);
+		io.emit('change_color', color, res.session('round'));
 	}
 );
 	
@@ -51,7 +62,6 @@ app.io = function(server_io) {
 	io = server_io;
 	io.on('connection', function(socket){
 			console.log(app.name + ' io connect');
-			io.emit('change_color', 'white');
   	})
 }
 
