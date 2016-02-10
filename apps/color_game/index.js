@@ -31,23 +31,24 @@ app.intent('ColorIntent', {
 		"slots":{"color":"COLORS_SLOT"},
 		"utterances":["{colors:COLORS_SLOT}"]
 	},function(req,res) {
-		var done = (res.session('round') > 3);
-		if (done) {
-			res.say('Bye Bye!');
-			return;
-		}
+		var done = res.session('round') ==  3;
 		console.log('round ' + res.session('round') + ' ' + res.session('color') + ' ' + req.slot('color'));
 		if(res.session('color') === req.slot('color')) {
 			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>').shouldEndSession(done);
 			io.emit('correct', res.session('round'));
 		} else {
-			res.say('Please try again').shouldEndSession(false);
+			res.say('Please try again').shouldEndSession(done);
 			io.emit('wrong', res.session('round'));
 		}
-		res.session('round', (res.session('round') + 1));
-		color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
-		console.log('next color ' + color);
-		io.emit('change_color', color, res.session('round'));
+		if (!done) {
+			res.session('round', (res.session('round') + 1));
+			color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+			console.log('next color ' + color);
+			res.session('color', color);
+			io.emit('change_color', color, res.session('round'));
+		} else {
+			console.log('done');
+		}
 	}
 );
 	
