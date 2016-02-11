@@ -5,6 +5,8 @@ var io;
 module.change_code = 1;
 
 var colorsArr = ["red","yellow","green","blue","black"];
+var goodArr = ['Good Job!', 'nice!', 'very good!', 'perfect!'];
+var badArr = ['Please try again', 'maybe next time', 'you can do better'];
 
 // Define an alexa-app
 var app = new alexa.app('colorgame');
@@ -35,10 +37,10 @@ app.intent('ColorIntent', {
 		console.log('round ' + res.session('round') + ' ' + res.session('color') + ' ' + req.slot('color'));
 		if(res.session('color') === req.slot('color')) {
 			//res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>').shouldEndSession(done);
-			res.say('Good Job!').shouldEndSession(done);
+			res.say(goodArr[Math.floor(Math.random() * goodArr.length)]).shouldEndSession(done);
 			io.emit('correct', res.session('round'));
 		} else {
-			res.say('Please try again').shouldEndSession(done);
+			res.say(badArr[Math.floor(Math.random() * badArr.length)]).shouldEndSession(done);
 			io.emit('wrong', res.session('round'));
 		}
 		if (!done) {
