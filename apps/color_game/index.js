@@ -34,7 +34,8 @@ app.intent('ColorIntent', {
 		var done = res.session('round') ==  3;
 		console.log('round ' + res.session('round') + ' ' + res.session('color') + ' ' + req.slot('color'));
 		if(res.session('color') === req.slot('color')) {
-			res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>').shouldEndSession(done);
+			//res.say('<audio src="https://s3.amazonaws.com/alexagamesmedia/correct.mp3"/>').shouldEndSession(done);
+			res.say('Good Job!').shouldEndSession(done);
 			io.emit('correct', res.session('round'));
 		} else {
 			res.say('Please try again').shouldEndSession(done);
