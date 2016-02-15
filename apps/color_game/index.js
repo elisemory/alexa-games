@@ -11,7 +11,7 @@ var badArr = ['Please try again', 'maybe next time', 'you can do better'];
 // Define an alexa-app
 var app = new alexa.app('colorgame');
 app.launch(function(req, res) {
-	res.say('<speak>Hi! My name is Alexa. What color do you see?</speak>').shouldEndSession(false);
+	res.say('Hi! My name is Alexa. What color do you see?').shouldEndSession(false);
 	io.emit('start_game');
 	color = colorsArr[Math.floor(Math.random() * colorsArr.length)];
 	console.log(color);
@@ -61,7 +61,7 @@ app.game = function(req, res) {
 }
 
 app.media = function(req, res) {
-	console.log('@@@ media ' + req.query.id);
+	//console.log('@@@ media ' + req.query.id);
 	res.sendFile('test.mp3', {root: './apps/color_game/media'});
 }
 
